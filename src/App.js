@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 import img from './images/image-1.webp'
 import img1 from './images/image-2.webp'
