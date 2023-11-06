@@ -137,7 +137,7 @@ function App() {
     setDatas(updatedDatas);
     setSelectedImages([]);
   };
-
+console.log(datas)
   return (
     <div className="max-w-[800px] mx-auto mt-10 bg-white p-5 rounded-md ">
       <article className="flex flex-row justify-between items-center mb-5 ">
@@ -171,12 +171,14 @@ function App() {
         </button>
       </article>
       <hr />
+      {/* "grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-6 mt-5" */}
       <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-6 mt-5" ref={galleryRef}>
         {datas.map((data, index) => (
           <div
             key={data.id}
             className={ ` group relative before:content-[''] before:absolute before:h-full before:w-full before:rounded-lg before:transition-colors before:cursor-move col-span-1 hover:before:bg-black/50 ${selectedImages.includes(data.id.toString()) ? ' before:bg-white/50' : ''
                           } ` }
+     
             draggable="true"
             onDragStart={(e) => handleDragStart(e, index)}
             id={index}
