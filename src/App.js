@@ -122,6 +122,7 @@ function App() {
 
   const handleCheckboxChange = (event) => {
     const imageId = event.target.id;
+    console.log(imageId)
     const isChecked = event.target.checked;
 
     if (isChecked) {
@@ -193,8 +194,10 @@ function App() {
               loading="lazy"
               width={data.width}
               height={data.height}
+
               decoding="async"
               data-nimg="1"
+              
               className="h-full w-full max-w-full rounded-lg object-contain border-2 undefined"
             />
             <input
