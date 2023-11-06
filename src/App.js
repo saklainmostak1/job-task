@@ -113,7 +113,7 @@ function App() {
     const uploadedImages = event.target.files;
 
     const newImages = Array.from(uploadedImages).map((file, index) => ({
-      id: datas.length + index + 1,
+      id: datas.length + datas.id + 1,
       image: URL.createObjectURL(file),
     }));
 
@@ -153,7 +153,7 @@ function App() {
               <div className="mt-3 flex">
                 <input
                   type="checkbox"
-                  checked
+                  defaultChecked
 
                   className="mt-1 mr-4 h-5 w-5 accent-blue-500"
 
@@ -193,7 +193,6 @@ function App() {
               loading="lazy"
               width={data.width}
               height={data.height}
-
               decoding="async"
               data-nimg="1"
               className="h-full w-full max-w-full rounded-lg object-contain border-2 undefined"
@@ -208,17 +207,17 @@ function App() {
             />
           </div>
         ))}
-        <div class="relative border-2 h-[133px] w-full border-dashed rounded-lg p-4 hover:bg-gray-50 transition-colors ease-linear ">
+        <div className="relative border-2 h-[132px] w-full border-dashed rounded-lg p-4 hover:bg-gray-50 transition-colors ease-linear ">
           <input
             onChange={handleImageUpload}
             type="file"
             multiple=""
             name="images"
             id="images"
-            class="absolute top-0 left-0 h-full w-full opacity-0 cursor-pointer"
+            className="absolute top-0 left-0 h-full w-full opacity-0 cursor-pointer"
             title="Try to upload photos..."
           />
-          <div class="h-full w-full flex flex-col justify-center items-center gap-y-4">
+          <div className="h-full w-full flex flex-col justify-center items-center gap-y-4">
             <img
               alt="placeholder"
               fetchpriority="high"
@@ -226,9 +225,10 @@ function App() {
               height="20"
               decoding="async"
               data-nimg="1"
-              srcset="https://upload.wikimedia.org/wikipedia/commons/6/6b/Picture_icon_BLACK.svg"
+              // srcset="https://upload.wikimedia.org/wikipedia/commons/6/6b/Picture_icon_BLACK.svg"
+              src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Picture_icon_BLACK.svg"
             />
-            <span class="whitespace-nowrap">Add Images</span>
+            <span className="whitespace-nowrap">Add Images</span>
           </div>
         </div>
       </div>
