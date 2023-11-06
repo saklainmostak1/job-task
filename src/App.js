@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 
-import img from './images/image-1.webp';
+import img10 from './images/image-1.webp';
 import img1 from './images/image-2.webp';
 import img2 from './images/image-3.webp';
 import img3 from './images/image-4.webp';
@@ -11,7 +11,7 @@ import img6 from './images/image-7.webp';
 import img7 from './images/image-8.webp';
 import img8 from './images/image-9.webp';
 import img9 from './images/image-10.jpeg';
-import img10 from './images/image-11.jpeg';
+import img from './images/image-11.jpeg';
 
 function App() {
   const [datas, setDatas] = useState([
@@ -172,13 +172,15 @@ console.log(datas)
       </article>
       <hr />
       {/* "grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-6 mt-5" */}
-      <div className="grid lg:grid-cols-5 md:grid-cols-4 grid-cols-3 gap-6 mt-5" ref={galleryRef}>
+      <div className="grid lg:grid-cols-5 md:grid-cols-4 grid-cols-3 gap-6 mt-5"    ref={galleryRef}>
         {datas.map((data, index) => (
           <div
             key={data.id}
             className={ ` group relative before:content-[''] before:absolute before:h-full before:w-full before:rounded-lg before:transition-colors before:cursor-move col-span-1 hover:before:bg-black/50 ${selectedImages.includes(data.id.toString()) ? ' before:bg-white/50' : ''
                           } ` }
-     
+            
+           
+        
             draggable="true"
             onDragStart={(e) => handleDragStart(e, index)}
             id={index}
