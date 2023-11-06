@@ -139,8 +139,8 @@ function App() {
   };
 console.log(datas)
   return (
-    <div className="max-w-[600px] mx-auto mt-10 bg-white p-5 rounded-md">
-      <article className="flex flex-row justify-between items-center mb-5 ">
+    <div className="max-w-[600px] mx-auto mt-10 bg-white p-5 rounded-md ">
+      {/* <article className="flex flex-row justify-between items-center mb-5 ">
         {selectedImages.length === 0 ? (
           <h1 className="text-xl text-black font-bold">Gallery</h1>
         ) : (
@@ -172,7 +172,7 @@ console.log(datas)
       </article>
       <hr />
       {/* "grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-6 mt-5" */}
-      <div className=""    ref={galleryRef}>
+      {/* <div className=""    ref={galleryRef}>
         {datas.map((data, index) => (
          index === 0 ?   <div
          key={data.id}
@@ -213,10 +213,10 @@ console.log(datas)
 
 
        
-      </div>
+      </div> */} 
       <div className="grid lg:grid-cols-4 md:grid-cols-4 grid-cols-3 gap-6 mt-5"    ref={galleryRef}>
         {datas.map((data, index) => (
-         index === 0 ? '' : 
+         index === 1000 ? '' : 
 
          <div
          key={data.id}
