@@ -1,5 +1,4 @@
 
-
 import React, { useState, useRef, useEffect } from 'react';
 
 import img10 from './images/image-1.webp';
@@ -61,78 +60,82 @@ function App() {
           image: img10,
         },
       ]);
-  const [selectedImages, setSelectedImages] = useState([]);
-  const [draggedImage, setDraggedImage] = useState(null);
-  const [draggedImageIndex, setDraggedImageIndex] = useState(null);
-  const [dragOverIndex, setDragOverIndex] = useState(null); // Track the drop target
-
-  const galleryRef = useRef(null);
-
-  const handleDragStart = (e, index) => {
-    setDraggedImage(datas[index]);
-    setDraggedImageIndex(index);
-    e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/plain', index);
-  };
-
-  const handleDragEnd = (e) => {
-    e.preventDefault();
-    e.target.classList.remove('dragged-image'); // Remove the dragged image style
-  };
-
-  const handleDragOver = (e, targetIndex) => {
-    e.preventDefault();
-    if (targetIndex !== draggedImageIndex) {
-      setDragOverIndex(targetIndex); // Track the drop target index
-    }
-  };
-
-  const handleDragLeave = (e) => {
-    e.preventDefault();
-    setDragOverIndex(null); // Clear the drop target index
-  };
-
-  const handleDrop = (e, targetIndex) => {
-    e.preventDefault();
-    if (draggedImageIndex !== null) {
-      const newDatas = [...datas];
-      newDatas.splice(targetIndex, 0, newDatas.splice(draggedImageIndex, 1)[0]);
-      setDatas(newDatas);
-      setDraggedImage(null);
-      setDraggedImageIndex(null);
-      setDragOverIndex(null); // Clear the drop target index
-    }
-  };
-
-  const handleImageUpload = (event) => {
-    const uploadedImages = event.target.files;
-
-    const newImages = Array.from(uploadedImages).map((file, index) => ({
-      id: datas.length + index + 1,
-      image: URL.createObjectURL(file),
-    }));
-
-    setDatas([...datas, ...newImages]);
-  };
-
-  const handleCheckboxChange = (event) => {
-    const imageId = event.target.id;
-
-    if (event.target.checked) {
-      setSelectedImages([...selectedImages, imageId]);
-    } else {
-      setSelectedImages(selectedImages.filter((id) => id !== imageId));
-    }
-  };
-
-  const handleDeleteImages = () => {
-    const selectedImageIds = selectedImages.map(Number);
-
-    const updatedDatas = datas.filter((data) => !selectedImageIds.includes(data.id));
-    setDatas(updatedDatas);
-    setSelectedImages([]);
-  };
-
+      const [selectedImages, setSelectedImages] = useState([]);
+      const [draggedImage, setDraggedImage] = useState(null);
+      const [draggedImageIndex, setDraggedImageIndex] = useState(null);
+      const [dragOverIndex, setDragOverIndex] = useState(null); // Track the drop target
+      const [showDropText, setShowDropText] = useState(false); // Track whether to display the "Drop here" text
+    
+      const galleryRef = useRef(null);
+    
+      const handleDragStart = (e, index) => {
+        setDraggedImage(datas[index]);
+        setDraggedImageIndex(index);
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', index);
+      };
+    
+      const handleDragEnd = (e) => {
+        e.preventDefault();
+        e.target.classList.remove('dragged-image'); // Remove the dragged image style
+      };
+    
+      const handleDragOver = (e, targetIndex) => {
+        e.preventDefault();
+        if (targetIndex !== draggedImageIndex) {
+          setDragOverIndex(targetIndex); // Track the drop target index
+          setShowDropText(true); // Show the "Drop here" text
+        }
+      };
+    
+      const handleDragLeave = (e) => {
+        e.preventDefault();
+        setDragOverIndex(null); // Clear the drop target index
+        setShowDropText(false); // Hide the "Drop here" text
+      };
+    
+      const handleDrop = (e, targetIndex) => {
+        e.preventDefault();
+        if (draggedImageIndex !== null) {
+          const newDatas = [...datas];
+          newDatas.splice(targetIndex, 0, newDatas.splice(draggedImageIndex, 1)[0]);
+          setDatas(newDatas);
+          setDraggedImage(null);
+          setDraggedImageIndex(null);
+          setDragOverIndex(null); // Clear the drop target index
+          setShowDropText(false); // Hide the "Drop here" text
+        }
+      };
+    
+      const handleImageUpload = (event) => {
+        const uploadedImages = event.target.files;
+    
+        const newImages = Array.from(uploadedImages).map((file, index) => ({
+          id: datas.length + index + 1,
+          image: URL.createObjectURL(file),
+        }));
+    
+        setDatas([...datas, ...newImages]);
+      };
+    
+      const handleCheckboxChange = (event) => {
+        const imageId = event.target.id;
+    
+        if (event.target.checked) {
+          setSelectedImages([...selectedImages, imageId]);
+        } else {
+          setSelectedImages(selectedImages.filter((id) => id !== imageId));
+        }
+      };
+    
+      const handleDeleteImages = () => {
+        const selectedImageIds = selectedImages.map(Number);
+    
+        const updatedDatas = datas.filter((data) => !selectedImageIds.includes(data.id));
+        setDatas(updatedDatas);
+        setSelectedImages([]);
+      };
+    
   return (
     <div className="container max-w-[1000px] mx-auto mt-20 bg-white p-5 rounded-md">
       <article className="mb-5">
@@ -180,12 +183,19 @@ function App() {
           }` : ` group relative before:content-[''] before:absolute before:h-full before:w-full before:rounded-lg before:transition-colors before:cursor-move col-span-1 hover:before:bg-black/50 ${selectedImages.includes(data.id.toString()) ? ' before:bg-white/50' : ''
           } `}`}
           >
-            <img
+           
+             {dragOverIndex === index && showDropText ?
+              <div className="flex items-center justify-center text-center  h-full w-full max-w-full rounded-lg object-contain border-2 undefined">
+              Drop here
+              </div>
+              :
+              <img
               src={data.image}
               alt={data.id}
               loading="lazy"
               className={`h-full w-full max-w-full rounded-lg object-contain border-2 undefined ${draggedImageIndex === index ? 'dragged-image' : ''}`}
             />
+            }
             <input
               type="checkbox"
               name={data.id}
