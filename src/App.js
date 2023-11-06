@@ -16,47 +16,47 @@ import img10 from './images/image-11.jpeg';
 function App() {
   const [datas, setDatas] = useState([
     {
-      id: 1,
+      id: 101,
       image: img,
     },
     {
-      id: 2,
+      id: 102,
       image: img1,
     },
     {
-      id: 3,
+      id: 103,
       image: img2,
     },
     {
-      id: 4,
+      id: 104,
       image: img3,
     },
     {
-      id: 5,
+      id: 105,
       image: img4,
     },
     {
-      id: 6,
+      id: 106,
       image: img5,
     },
     {
-      id: 7,
+      id: 107,
       image: img6,
     },
     {
-      id: 8,
+      id: 108,
       image: img7,
     },
     {
-      id: 9,
+      id: 109,
       image: img8,
     },
     {
-      id: 10,
+      id: 110,
       image: img9,
     },
     {
-      id: 11,
+      id: 111,
       image: img10,
     },
   ]);
@@ -112,10 +112,14 @@ function App() {
   const handleImageUpload = (event) => {
     const uploadedImages = event.target.files;
 
+
     const newImages = Array.from(uploadedImages).map((file, index) => ({
-      id: datas.length + datas.id + 1,
+
+      id: datas.length + index + 1,
+      // index
       image: URL.createObjectURL(file),
     }));
+
 
     setDatas([...datas, ...newImages]);
   };
@@ -180,7 +184,7 @@ function App() {
         {datas.map((data, index) => (
           <div
 
-            key={data.id}
+            key={index}
             className={`group relative before:content-[''] before:absolute before:h-full before:w-full before:rounded-lg before:transition-colors before:cursor-move col-span-1 hover:before:bg-black/50 ${selectedImages.includes(data.id.toString()) ? ' before:bg-white/50' : ''
               }`}
             // className="group relative before:content-[''] before:absolute before:h-full before:w-full before:rounded-lg before:transition-colors before:cursor-move col-span-1 hover:before:bg-black/50"
@@ -197,7 +201,7 @@ function App() {
 
               decoding="async"
               data-nimg="1"
-              
+
               className="h-full w-full max-w-full rounded-lg object-contain border-2 undefined"
             />
             <input
@@ -210,7 +214,7 @@ function App() {
             />
           </div>
         ))}
-        <div className="relative border-2 h-[132px] w-full border-dashed rounded-lg p-4 hover:bg-gray-50 transition-colors ease-linear ">
+        <div className="relative border-2 h-[133px] w-full border-dashed rounded-lg p-4 hover:bg-gray-50 transition-colors ease-linear ">
           <input
             onChange={handleImageUpload}
             type="file"
@@ -240,3 +244,7 @@ function App() {
 }
 
 export default App;
+
+
+
+
