@@ -172,7 +172,7 @@ console.log(datas)
       </article>
       <hr />
       {/* "grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-6 mt-5" */}
-      <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-6 mt-5" ref={galleryRef}>
+      <div className="grid lg:grid-cols-5 md:grid-cols-4 grid-cols-3 gap-6 mt-5" ref={galleryRef}>
         {datas.map((data, index) => (
           <div
             key={data.id}
@@ -220,7 +220,7 @@ console.log(datas)
               height="20"
               decoding="async"
               data-nimg="1"
-              srcset="https://upload.wikimedia.org/wikipedia/commons/6/6b/Picture_icon_BLACK.svg"
+              srcset="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"
             />
             <span class="whitespace-nowrap">Add Images</span>
           </div>
