@@ -112,29 +112,21 @@ function App() {
   const handleImageUpload = (event) => {
     const uploadedImages = event.target.files;
 
-
     const newImages = Array.from(uploadedImages).map((file, index) => ({
-
       id: datas.length + index + 1,
-      // index
       image: URL.createObjectURL(file),
     }));
-
 
     setDatas([...datas, ...newImages]);
   };
 
   const handleCheckboxChange = (event) => {
     const imageId = event.target.id;
-    console.log(imageId)
-    const isChecked = event.target.checked;
 
-    if (isChecked) {
+    if (event.target.checked) {
       setSelectedImages([...selectedImages, imageId]);
-      event.target.classList.add('checked'); // Add a class to the checked checkbox
     } else {
       setSelectedImages(selectedImages.filter((id) => id !== imageId));
-      event.target.classList.remove('checked'); // Remove the class when unchecked
     }
   };
 
@@ -147,18 +139,17 @@ function App() {
   };
 
   return (
-
-    <div className=" max-w-[800px] mt-10 mx-auto bg-white p-5 rounded-md ">
+    <div className="max-w-[800px] mx-auto mt-10 bg-white p-5 rounded-md ">
       <article className="flex flex-row justify-between items-center mb-5 ">
         {selectedImages.length === 0 ? (
-          <h1 className="text-2xl text-black font-bold">Gallery</h1>
+          <h1 className="text-xl text-black font-bold">Gallery</h1>
         ) : (
           <div>
             {selectedImages.length > 0 && (
-              <div className="mt-3 flex">
+              <div className=" flex">
                 <input
                   type="checkbox"
-                  defaultChecked
+                  checked
 
                   className="mt-1 mr-4 h-5 w-5 accent-blue-500"
 
@@ -167,7 +158,7 @@ function App() {
                   <strong>
                     {selectedImages.length} {selectedImages.length === 1 ? 'file selected' : 'files selected'}
 
-
+                    
                   </strong>
 
                 </h1>
@@ -180,14 +171,12 @@ function App() {
         </button>
       </article>
       <hr />
-      <div className="grid lg:grid-cols-5 md:grid-cols-4 grid-cols-4 gap-6 mt-5" ref={galleryRef}>
+      <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-6 mt-5" ref={galleryRef}>
         {datas.map((data, index) => (
           <div
-
-            key={index}
-            className={`group relative before:content-[''] before:absolute before:h-full before:w-full before:rounded-lg before:transition-colors before:cursor-move col-span-1 hover:before:bg-black/50 ${selectedImages.includes(data.id.toString()) ? ' before:bg-white/50' : ''
-              }`}
-            // className="group relative before:content-[''] before:absolute before:h-full before:w-full before:rounded-lg before:transition-colors before:cursor-move col-span-1 hover:before:bg-black/50"
+            key={data.id}
+            className={ ` group relative before:content-[''] before:absolute before:h-full before:w-full before:rounded-lg before:transition-colors before:cursor-move col-span-1 hover:before:bg-black/50 ${selectedImages.includes(data.id.toString()) ? ' before:bg-white/50' : ''
+                          } ` }
             draggable="true"
             onDragStart={(e) => handleDragStart(e, index)}
             id={index}
@@ -198,10 +187,8 @@ function App() {
               loading="lazy"
               width={data.width}
               height={data.height}
-
               decoding="async"
               data-nimg="1"
-
               className="h-full w-full max-w-full rounded-lg object-contain border-2 undefined"
             />
             <input
@@ -209,22 +196,21 @@ function App() {
               name={data.id}
               id={data.id}
               className={` absolute top-4 left-4 h-5 w-5 accent-blue-500 opacity-0 ${selectedImages.includes(data.id.toString()) ? 'opacity-100' : 'absolute top-4 left-4 h-5 w-5 accent-blue-500 group-hover:opacity-100 transition-opacity delay-100 duration-100 ease-linear cursor-pointer opacity-0'}`}
-              // className="absolute top-4 left-4 h-5 w-5 accent-blue-500 group-hover:opacity-100 transition-opacity delay-100 duration-100 ease-linear cursor-pointer opacity-0"
               onChange={handleCheckboxChange}
             />
           </div>
         ))}
-        <div className="relative border-2 h-[133px] w-full border-dashed rounded-lg p-4 hover:bg-gray-50 transition-colors ease-linear ">
+        <div class="relative h-[133px] border-2 border-dashed rounded-lg p-4 hover:bg-gray-50 transition-colors ease-linear ">
           <input
             onChange={handleImageUpload}
             type="file"
             multiple=""
             name="images"
             id="images"
-            className="absolute top-0 left-0 h-full w-full opacity-0 cursor-pointer"
+            class="absolute top-0 left-0 h-full w-full opacity-0 cursor-pointer"
             title="Try to upload photos..."
           />
-          <div className="h-full w-full flex flex-col justify-center items-center gap-y-4">
+          <div class="h-full w-full flex flex-col justify-center items-center gap-y-4">
             <img
               alt="placeholder"
               fetchpriority="high"
@@ -232,10 +218,9 @@ function App() {
               height="20"
               decoding="async"
               data-nimg="1"
-              // srcset="https://upload.wikimedia.org/wikipedia/commons/6/6b/Picture_icon_BLACK.svg"
-              src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Picture_icon_BLACK.svg"
+              srcset="https://upload.wikimedia.org/wikipedia/commons/6/6b/Picture_icon_BLACK.svg"
             />
-            <span className="whitespace-nowrap">Add Images</span>
+            <span class="whitespace-nowrap">Add Images</span>
           </div>
         </div>
       </div>
@@ -244,7 +229,4 @@ function App() {
 }
 
 export default App;
-
-
-
 
